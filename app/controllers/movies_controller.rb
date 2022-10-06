@@ -8,6 +8,37 @@ class MoviesController < ApplicationController
   
     def index
       @movies = Movie.all
+      @movies = Movie.order(params[:sort_by]) 
+      @sort_column = params[:sort_by]
+      @all_ratings = Movie.all_ratings
+      @ratings_to_show = {}
+      
+    if params[:ratings]
+      session[:ratings] = params[:ratings]
+      @ratings = session[:ratings].keys
+    end
+
+    if params[:ratings].nil?
+      @ratings = @all_ratings
+    end
+
+    session[:sort_by] = params[:sort_by] if params[:sort_by]
+    @movies = Movie.order(session[:sort_by]).where('rating IN (?)', @ratings)
+
+
+
+    
+
+    
+
+
+    sortedby = params[:sortedby] || session[:sortedby]
+    if sortedby == 'title'
+      @title_header = 'hilite'
+    elsif sortedby == 'release_date'
+      @release_date_header = 'hilite'
+    end
+
     end
   
     def new
