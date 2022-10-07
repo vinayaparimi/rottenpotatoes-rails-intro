@@ -28,8 +28,8 @@ class MoviesController < ApplicationController
       @ratings = session[:ratings].keys
     end
 
-    if params[:sort_by].nil?
-      Movie.order(params[:sort_by]) 
+    if !params[:sort_by].nil?
+      @movies.order(params[:sort_by]) 
     end
 
     @sorted = 'title'
