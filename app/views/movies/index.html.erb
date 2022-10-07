@@ -16,9 +16,20 @@
 <table class="table table-striped col-md-12" id="movies">
   <thead>
     <tr>
-      <th>Movie Title</th> 
+      
+      <th class='<%='p-3 mb-2 bg-warning text-dark' if params[:sort] =='title'%>'
+      <th class="<%='hilite' if params[:sort] =='title'%>">
+      <%=link_to "Movie Title", movies_path(:sort => "title", :ratings => @ratings_to_show), :id => 'title_header' %>
+      </th>
+      </th>
+
       <th>Rating</th>
-      <th>Release Date</th> 
+      
+      <th class='<%='p-3 mb-2 bg-warning text-dark' if params[:sort] =='release_date'%>'
+      <th class="<%='hilite' if params[:sort] =='release_date'%>">
+      <%=link_to "Release Date", movies_path(:sort => "release_date", :ratings => @ratings_to_show), :id => 'release_date_header' %>
+      </th>
+      </th>
       <th>More Info</th>
     </tr>
   </thead>
